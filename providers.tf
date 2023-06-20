@@ -9,7 +9,7 @@ terraform {
   required_version = ">= 0.14.0"
 
   backend "s3" {
-    bucket = var.bucket_name
+    bucket = "367f8054-5cf4-41c6-81bb-4b37d4243457"
     key    = "terraform.tfstate"
     region = "us-west-2"
   }

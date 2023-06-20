@@ -11,5 +11,5 @@ variable "public_subnet_cidr2" {
 }
 
 variable "bucket_name" {
-  default = "ase-ecr-bucket"
+  default = "367f8054-5cf4-41c6-81bb-4b37d4243457"
 }
