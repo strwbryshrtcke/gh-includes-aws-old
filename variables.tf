@@ -9,3 +9,7 @@ variable "public_subnet_cidr1" {
 variable "public_subnet_cidr2" {
   default = "10.0.1.0/24"
 }
+
+variable "bucket_name" {
+  default = "ase-ecr-bucket-${random_string.suffix.result}"
+}
