@@ -29,7 +29,7 @@ jobs:
           aws s3 mb s3://$bucket_name
           echo $bucket_name
           aws s3 ls
-          terraform init
+          terraform init -var="bucket_name=$bucket_name"
           terraform apply -auto-approve -var="bucket_name=$bucket_name"
       
       
