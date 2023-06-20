@@ -11,5 +11,5 @@ variable "public_subnet_cidr2" {
 }
 
 variable "bucket_name" {
-  default = "ase-ecr-bucket-${random_string.suffix.result}"
+  default = "ase-ecr-bucket"
 }
