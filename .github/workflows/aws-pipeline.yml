@@ -17,26 +17,14 @@ jobs:
     steps:
       - name: 'Checkout'
         uses: actions/checkout@v2
-
-      # - name: 'create aws s3 bucket using cli'
-      #   uses: unfor19/install-aws-cli-action@master
+        
       - name: 'Terraform Setup'
         uses: hashicorp/setup-terraform@v1
         
       - name: 'Terraform init and Terraform apply'
         run: | 
-          # bucket_name=$(uuidgen)
-          # aws s3 mb s3://$bucket_name
-          # echo $bucket_name
           aws s3 ls
           terraform init 
           terraform apply -auto-approve 
-      
-      
-        
-#       - name: 'Terraform Init'
-#         run: |
-#           terraform init
-#           echo ${{bucket_name}}
         
   
