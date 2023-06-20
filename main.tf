@@ -14,7 +14,7 @@ resource "aws_key_pair" "ssh" {
 
 
 resource "aws_iam_instance_profile" "customer_profile" {
-  name       = "customer_profile"
+  name       = "customer_profile_terraform"
   role       = aws_iam_role.customer_role.id
   depends_on = [aws_iam_role.customer_role]
 }
