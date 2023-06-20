@@ -1,17 +1,41 @@
-name: List S3 Contents - Multi OS
+name: 'Terraform Deploy to AWS ECR'
 
-on:
-  push
+on: [push]
+defaults:
+      run:
+        shell: bash
 jobs:
-  listS3:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [macOS-10.14, windows-2016, ubuntu-18.04]
+
+  Deploy-validate:
+    name: 'Deploy Stack to AWS'
+    runs-on: ubuntu-20.04
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: 'us-west-2'
+      
     steps:
-      - uses: chrislennon/action-aws-cli@v1.1
-      # All commands after this point have access to the AWS CLI
-      - run: aws s3 ls
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: 'Checkout'
+        uses: actions/checkout@v2
+
+      - name: 'create aws s3 bucket using cli'
+        uses: unfor19/install-aws-cli-action@master
+      - name: 'Terraform Setup'
+        uses: hashicorp/setup-terraform@v1
+        
+      - name: 'List AWS S3 ls'
+        run: | 
+          bucket_name=$(uuidgen)
+          aws s3 mb s3://$bucket_name
+          echo $bucket_name
+          aws s3 ls
+          terraform init
+      
+      
+        
+#       - name: 'Terraform Init'
+#         run: |
+#           terraform init
+#           echo ${{bucket_name}}
+        
+  
