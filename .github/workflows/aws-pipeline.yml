@@ -1,6 +1,6 @@
 name: 'Terraform Deploy to AWS ECR'
 
-on: [pull_request]
+on: [push]
 defaults:
       run:
         shell: bash
